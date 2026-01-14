@@ -1,6 +1,11 @@
 {
   "name": "rto-frontend",
   "version": "0.0.1",
+  "homepage": "https://returntooffice.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thangamariappan19/rto.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
