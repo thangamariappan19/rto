@@ -109,17 +109,105 @@ body {
   }
 }
 
+/* Mobile Navigation (Hidden by default) */
+.mobile-nav {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .app-layout {
     grid-template-columns: 1fr;
     grid-template-areas: "main";
     height: auto;
+    min-height: 100vh;
     overflow-y: auto;
+    padding-bottom: 80px;
+    /* Space for bottom nav */
   }
 
   .app-nav {
     display: none;
-    /* Mobile nav would be separate */
+  }
+
+  .mobile-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border-subtle);
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    width: 100%;
+    height: 100%;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-item.active {
+    color: var(--accent-primary);
+  }
+
+  .mobile-nav-item mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Mobile Layout Adjustments */
+  .app-main {
+    padding: 1.5rem 1rem !important;
+    /* Override desktop padding */
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .header-title h1 {
+    font-size: 2rem !important;
+  }
+
+  .action-bar {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .action-bar button {
+    flex: 1;
+  }
+
+  /* Employee Table Adjustments for Mobile */
+  .glass-table th:nth-child(4),
+  /* Preferred Days */
+  .glass-table th:nth-child(5),
+  /* Role */
+  .glass-table th:nth-child(6),
+  /* Last Check-in */
+  .glass-table td:nth-child(4),
+  .glass-table td:nth-child(5),
+  .glass-table td:nth-child(6) {
+    display: none;
+    /* Hide less critical columns on mobile to prevent horizontal scroll mess */
   }
 }
 
@@ -195,11 +283,19 @@ body {
   -webkit-text-fill-color: transparent;
   line-height: 1.1;
   margin-bottom: 0.5rem;
+  background-clip: text;
 }
 
 .header-title p {
   color: var(--text-secondary);
   font-size: 1.1rem;
+}
+
+.page-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .action-bar {
@@ -508,4 +604,49 @@ body {
   background: rgba(30, 41, 59, 0.7);
   border-color: rgba(99, 102, 241, 0.3);
   z-index: 2;
+}
+
+/* Search and Inputs */
+.search-wrapper {
+  position: relative;
+}
+
+.search-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 10px 10px 40px;
+  border-radius: 12px;
+  color: white;
+  width: 250px;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent-primary);
+}
+
+/* Key Observations Grid */
+.key-observations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Mobile adjustments for new elements */
+@media (max-width: 768px) {
+  .search-wrapper {
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+    /* Full width on mobile */
+  }
+
+  .key-observations-grid {
+    grid-template-columns: 1fr;
+    /* Stack cards on mobile */
+  }
 }

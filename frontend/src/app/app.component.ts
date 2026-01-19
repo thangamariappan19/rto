@@ -164,9 +164,9 @@ interface DepartmentStats {
               <p>Manage workforce status and RTO compliance</p>
             </div>
              <div class="action-bar">
-               <div style="position: relative;">
+               <div class="search-wrapper">
                   <mat-icon style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);">search</mat-icon>
-                  <input type="text" [(ngModel)]="searchText" placeholder="Search employees..." style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 10px 10px 10px 40px; border-radius: 12px; color: white; width: 250px;">
+                  <input type="text" [(ngModel)]="searchText" placeholder="Search employees..." class="search-input">
                </div>
               <button mat-stroked-button color="basic" [matMenuTriggerFor]="filterMenu" style="border: 1px solid var(--border-subtle); color: var(--text-primary);">
                 <mat-icon>filter_list</mat-icon> {{ filterDepartment || 'Filter' }}
@@ -249,7 +249,7 @@ interface DepartmentStats {
         <div *ngIf="currentView === 'analytics'" class="view-container animate-in">
            <header class="header">
             <div class="header-title">
-              <div style="display: flex; align-items: center; gap: 1rem;">
+              <div class="page-title-row">
                 <h1>Deep Analytics</h1>
                 <mat-chip *ngIf="isFutureDate" color="accent" selected class="prediction-chip">
                   <mat-icon style="font-size: 18px; margin-right: 4px; color: inherit;">auto_awesome</mat-icon>
@@ -298,7 +298,7 @@ interface DepartmentStats {
             
             <div class="bento-item span-4 delay-4">
               <div class="card-label">Key Observations</div>
-              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem;">
+              <div class="key-observations-grid">
                 <!-- DYNAMIC CARDS BASED ON DATE -->
                 <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
                   <div style="color: var(--accent-secondary); font-size: 2rem; font-weight: 700;">
@@ -367,6 +367,26 @@ interface DepartmentStats {
         </div>
 
       </aside>
+
+      <!-- Mobile Bottom Navigation -->
+      <nav class="mobile-nav">
+        <div class="mobile-nav-item" [class.active]="currentView === 'dashboard'" (click)="setView('dashboard')">
+          <mat-icon>dashboard</mat-icon>
+          <span>Home</span>
+        </div>
+        <div class="mobile-nav-item" [class.active]="currentView === 'employees'" (click)="setView('employees')">
+          <mat-icon>people</mat-icon>
+          <span>Team</span>
+        </div>
+        <div class="mobile-nav-item" [class.active]="currentView === 'analytics'" (click)="setView('analytics')">
+          <mat-icon>analytics</mat-icon>
+          <span>Insights</span>
+        </div>
+        <div class="mobile-nav-item">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </div>
+      </nav>
     </div>
   `,
   styles: []
