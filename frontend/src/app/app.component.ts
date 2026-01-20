@@ -300,7 +300,7 @@ interface DepartmentStats {
               <div class="card-label">Key Observations</div>
               <div class="key-observations-grid">
                 <!-- DYNAMIC CARDS BASED ON DATE -->
-                <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <div class="observation-card">
                   <div style="color: var(--accent-secondary); font-size: 2rem; font-weight: 700;">
                     {{ isFutureDate ? '+35%' : '+24%' }}
                   </div>
@@ -309,12 +309,12 @@ interface DepartmentStats {
                     {{ isFutureDate ? 'Projected surge due to quarter-end planning.' : 'Highest utilization recorded in Building A, Floor 3.' }}
                   </p>
                 </div>
-                 <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                 <div class="observation-card">
                   <div style="color: var(--accent-warning); font-size: 2rem; font-weight: 700;">Tue/Thu</div>
                   <div style="color: var(--text-secondary); font-size: 0.9rem;">Most Popular Days</div>
                   <p style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.5rem;">Consistently reaching 90% capacity on these days.</p>
                 </div>
-                 <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                 <div class="observation-card">
                   <div style="color: var(--accent-success); font-size: 2rem; font-weight: 700;">
                     {{ isFutureDate ? '100% Est.' : '98%' }}
                   </div>
@@ -338,7 +338,7 @@ interface DepartmentStats {
           </div>
           
           <div style="display: flex; flex-direction: column; gap: 1rem;">
-            <div *ngFor="let insight of insights" style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <div *ngFor="let insight of insights" class="insight-card">
               <div style="display: flex; gap: 0.8rem; margin-bottom: 0.5rem;">
                 <mat-icon [style.color]="insight.color" style="font-size: 20px;">{{ insight.icon }}</mat-icon>
                 <div style="font-weight: 600; font-size: 0.9rem;">{{ insight.title }}</div>
