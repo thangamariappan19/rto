@@ -20,20 +20,27 @@ def read_root():
 
 @app.get("/forecast/daily")
 def get_daily_forecast(days: int = 30):
-    """Returns predicted occupancy for the next N days."""
+    """Returns predicted occupancy for the next N days with weekly cycles."""
     today = date.today()
     forecast = []
     for i in range(days):
         target_date = today + timedelta(days=i)
-        # Simulate weekend drop
-        is_weekend = target_date.weekday() >= 5
-        base_occupancy = 120 if not is_weekend else 10
-        noise = random.randint(-15, 15) if not is_weekend else random.randint(0, 5)
+        weekday = target_date.weekday()
+        
+        # Realistic weekly pattern: Tue-Thu are peaks, Mon/Fri lower, Sat/Sun minimal
+        if weekday in [1, 2, 3]: # Tue, Wed, Thu
+            base_occupancy = random.randint(85, 95)
+        elif weekday in [0, 4]: # Mon, Fri
+            base_occupancy = random.randint(60, 75)
+        else: # Weekend
+            base_occupancy = random.randint(5, 15)
+            
+        noise = random.randint(-5, 5)
         
         forecast.append({
             "date": target_date.isoformat(),
             "predicted_occupancy": max(0, base_occupancy + noise),
-            "confidence_score": 0.85 if not is_weekend else 0.98
+            "confidence_score": 0.92 if weekday < 5 else 0.98
         })
     return forecast
 
